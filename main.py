@@ -1,11 +1,14 @@
 import cohere
 import pdfkit
 import markdown
-import config  # Import the config file
 import os
+from dotenv import load_dotenv  # Add this import
 
+# Load environment variables from .env file
+load_dotenv()
 
-co = cohere.Client(config.COHERE_API_KEY)
+COHERE_API_KEY = os.getenv("COHERE_API_KEY")
+co = cohere.Client(COHERE_API_KEY)
 
 def generate_ebook(topic, chapters):
     prompt = f"Write an eBook about {topic} with {chapters} chapters. Each chapter should have a title and content. Format the output in Markdown."
